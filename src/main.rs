@@ -1,14 +1,10 @@
-use std::fs::File;
-use std::env;
-use std::collections::HashMap;
+use std::fs::File; //crate for handling files
+use std::env; //crate for handling arguments
+use std::collections::HashMap; //crate to implement dictionary
 use std::io::prelude::*; //implements read_to_string fxn
 // use std::error::Error;
-use csv::Reader;
-use regex::Regex;
-// use std::time::Duration;
-// use std::thread;
-
-
+use csv::Reader; //crate to easily read CSV files
+use regex::Regex; //crate to allow regex for easier string parsing
 
 fn main() -> std::io::Result<()> {
 
@@ -40,13 +36,10 @@ fn main() -> std::io::Result<()> {
     //determine star rating based on total sentiment value that was calculated
     let star_rating = get_star_rating(accumulated_score);
 
-
-
     //display final results of sentiment scoring calculation
     println!("\n{} score: {:.2}", filename, accumulated_score);
     println!("{} Stars: {}", filename, star_rating);
 
-    
     Ok(()) //successful execution of program
 
 }
