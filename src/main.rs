@@ -89,8 +89,8 @@ fn get_sentiment_score(filename : &str, sentiment_table : HashMap<String, f32>) 
     let mut accumulated_score = 0.0;
 
 
-    //define regex to correctly identify words in the list
-    let re = Regex::new(r"\W").unwrap(); 
+    //define regex to correctly split words on whitespace in the list
+    let re = Regex::new(r"[\t \n\r\f]").unwrap(); 
 
     //print header for output
     println!("[word: current_score, accumulated_score]");
