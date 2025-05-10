@@ -8,28 +8,29 @@ use regex::Regex; //crate to allow regex for easier string parsing
 
 fn main() -> std::io::Result<()> {
 
+    /* 
+    Read command line arguments
+    Format is cargo run <filename>
+    where filename is the name of the file to read
+    */
+    let args: Vec<String> = env::args().collect();
+
+    /* if no file is provided in args, exit the program as it will not work */
+       let filename;
+       if args.len() < 2 {
+           panic!("Please specify a file to gather a sentiment score..."); //default
+       }
+       else {
+           filename = &args[1]; //user's choice
+       }
+
     //create dictionary to store the sentiment scores
     let mut sentiment_table : HashMap<String, f32> = HashMap::new();
 
     //fill dictionary with key, value pairs from socialsent.csv
     sentiment_table = create_sentiment_table(sentiment_table);
 
-    /* 
-    Read command line arguments
-    Format is ./main <filename>
-    where filename is the name of the file to read
-    */
-    let args: Vec<String> = env::args().collect();
-
-    /* if no file is provided in args, use review.txt as default file
-       otherwise use the file provided by user */
-    let filename;
-    if args.len() < 2 {
-        filename = "review.txt"; //default
-    }
-    else {
-        filename = &args[1]; //user's choice
-    }
+    
 
     let accumulated_score = get_sentiment_score(filename, sentiment_table);
 
